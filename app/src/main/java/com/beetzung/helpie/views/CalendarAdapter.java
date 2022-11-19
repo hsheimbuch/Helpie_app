@@ -1,5 +1,6 @@
 package com.beetzung.helpie.views;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,11 +33,15 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull CalendarViewHolder holder, int position) {
-        holder.dayOfMonth.setText(daysOfMonth.get(position));
+        String day = daysOfMonth.get(position);
+        if (day != null) {
+            holder.dayOfMonth.setText(day);
+        }
     }
 
     @Override
     public int getItemCount() {
+        Log.d("HELPIELOG", "getItemCount: " + daysOfMonth.size());
         return daysOfMonth.size();
     }
 

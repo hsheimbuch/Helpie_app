@@ -17,7 +17,7 @@ val AppCompatActivity.currentFragment: BaseFragment?
     }
 
 val Any.TAG: String
-    get() = this::class.java.simpleName
+    get() = "HELPIELOG" + this::class.java.simpleName
 
 fun Fragment.pop() {
     navController.popBackStack()
@@ -48,16 +48,16 @@ class DataEvent<out T>(private val content: T) {
 
 typealias Event = DataEvent<Unit>
 
-fun getDaysInMonthArray(): ArrayList<String> {
+fun getDaysInMonthArray(): ArrayList<String?> {
     val date = LocalDate.now()
-    val daysInMonthArray: ArrayList<String> = ArrayList()
+    val daysInMonthArray: ArrayList<String?> = ArrayList()
     val yearMonth: YearMonth = YearMonth.from(date)
     val daysInMonth: Int = yearMonth.lengthOfMonth()
     val firstOfMonth: LocalDate = date.withDayOfMonth(1)
     val dayOfWeek = firstOfMonth.dayOfWeek.value
     for (i in 1..42) {
         if (i <= dayOfWeek || i > daysInMonth + dayOfWeek) {
-            daysInMonthArray.add("")
+            daysInMonthArray.add(null)
         } else {
             daysInMonthArray.add((i - dayOfWeek).toString())
         }

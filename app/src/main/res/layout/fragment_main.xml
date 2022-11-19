@@ -9,36 +9,117 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:background="@drawable/main_calendar_background"
+        android:orientation="vertical"
         android:paddingBottom="20dp"
-        app:layout_constraintTop_toTopOf="parent" >
-        <TextView
-            android:id="@+id/main_text_date"
-            android:layout_width="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Hello World!"
             android:layout_marginTop="20dp"
-            android:layout_marginStart="9dp"
-            android:textSize="20sp"
-            android:textColor="@color/text_on_surface"/>
+            android:orientation="horizontal"
+            android:gravity="center">
+            <TextView
+                android:id="@+id/main_text_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hello World!"
+                android:textColor="@color/text_on_surface"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="32dp"
+            android:layout_marginHorizontal="8dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Mon"
+                android:textAlignment="center"
+                android:textColor="@color/text_on_surface"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Tue"
+                android:textAlignment="center"
+                android:textColor="@color/text_on_surface"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Wed"
+                android:textAlignment="center"
+                android:textColor="@color/text_on_surface"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Thu"
+                android:textAlignment="center"
+                android:textColor="@color/text_on_surface"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Fri"
+                android:textAlignment="center"
+                android:textColor="@color/text_on_surface"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Sat"
+                android:textAlignment="center"
+                android:textColor="@color/text_on_surface"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Sun"
+                android:textAlignment="center"
+                android:textColor="@color/text_on_surface"
+                android:textSize="16sp"/>
+
+        </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/main_calendar_recycler"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"/>
+            android:layout_height="350dp"
+            android:layout_marginTop="32dp"
+            tools:itemCount="31"
+            tools:listitem="@layout/calendar_cell" />
 
     </LinearLayout>
 
     <Button
-        style="@style/HelpieButton"
         android:id="@+id/main_button"
-        android:drawableLeft="@drawable/ic_add"
+        style="@style/HelpieButton"
         android:layout_width="312dp"
         android:layout_height="57dp"
         android:layout_marginHorizontal="24dp"
         android:layout_marginBottom="16dp"
+        android:drawableLeft="@drawable/ic_add"
         android:text="@string/button_track_current_mood"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
