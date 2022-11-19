@@ -31,6 +31,9 @@
         <action
             android:id="@+id/action_navigation_feelings_to_navigation_advice"
             app:destination="@id/navigation_advice" />
+        <argument
+            android:name="emotion"
+            app:argType="com.beetzung.helpie.data.model.Emotion" />
     </fragment>
     <fragment
         android:id="@+id/navigation_settings"

@@ -48,7 +48,7 @@ class CameraFragment : BaseFragment(R.layout.fragment_camera) {
             event.handle { emotion ->
                 hideLoadingDialog()
                 emotion?.let {
-                    navController.navigate(CameraFragmentDirections.actionCameraFragmentToFeelingsFragment())
+                    navController.navigate(CameraFragmentDirections.actionCameraFragmentToFeelingsFragment(emotion))
                 } ?: showBadFaceDialog()
             }
         }
