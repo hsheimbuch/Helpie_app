@@ -9,11 +9,7 @@
         android:id="@+id/mainFragment"
         android:name="com.beetzung.helpie.ui.main.MainFragment"
         android:label="fragment_main"
-        tools:layout="@layout/fragment_main" >
-        <action
-            android:id="@+id/action_mainFragment_to_cameraFragment"
-            app:destination="@id/cameraFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_main" />
     <fragment
         android:id="@+id/cameraFragment"
         android:name="com.beetzung.helpie.ui.scan.CameraFragment"
@@ -28,4 +24,7 @@
         android:name="com.beetzung.helpie.ui.scan.FeelingsFragment"
         android:label="fragment_feelings"
         tools:layout="@layout/fragment_feelings" />
+    <action
+        android:id="@+id/action_global_cameraFragment"
+        app:destination="@id/cameraFragment" />
 </navigation>
