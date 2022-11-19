@@ -18,6 +18,7 @@ import androidx.fragment.app.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.beetzung.helpie.R
 import com.beetzung.helpie.core.*
+import com.beetzung.helpie.data.model.Emotion
 import com.beetzung.helpie.databinding.FragmentCameraBinding
 import com.beetzung.helpie.ui.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -48,7 +49,7 @@ class CameraFragment : BaseFragment(R.layout.fragment_camera) {
             event.handle { emotion ->
                 hideLoadingDialog()
                 emotion?.let {
-                    navController.navigate(CameraFragmentDirections.actionCameraFragmentToFeelingsFragment(emotion))
+                    navigateToFeelingsScreen(it)
                 } ?: showBadFaceDialog()
             }
         }
@@ -56,6 +57,10 @@ class CameraFragment : BaseFragment(R.layout.fragment_camera) {
 
     private fun showBadFaceDialog() {
         // TODO add dialog
+    }
+
+    private fun navigateToFeelingsScreen(emotion: Emotion) {
+        navController.navigate(CameraFragmentDirections.actionCameraFragmentToFeelingsFragment(emotion))
     }
 
     private fun FragmentCameraBinding.setupView() {
