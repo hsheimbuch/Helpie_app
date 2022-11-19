@@ -22,19 +22,35 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         binding = ActivityMainBinding.bind(findViewById(R.id.root_view))
         binding.setupView()
-        navController.addOnDestinationChangedListener { _, destination, _ ->
-            when (destination.id) {
-                R.id.navigation_dashboard,
-                R.id.navigation_home,
-                R.id.navigation_settings -> binding.activityNavView.visibility = View.VISIBLE
-                else ->
-                    binding.activityNavView.visibility = View.GONE
-            }
-        }
     }
 
     private fun ActivityMainBinding.setupView() {
+        setSupportActionBar(activityToolbar)
+        val appBarConfiguration = AppBarConfiguration(
+            setOf(R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_settings)
+        )
+        setupActionBarWithNavController(this@MainActivity, navController, appBarConfiguration)
         activityNavView.setupWithNavController(navController)
+        navController.addOnDestinationChangedListener { _, destination, b ->
+            when (destination.id) {
+                R.id.navigation_dashboard,
+                R.id.navigation_home,
+                R.id.navigation_settings -> {
+                    activityNavView.visibility = View.VISIBLE
+                }
+                else -> {
+                    activityNavView.visibility = View.GONE
+                }
+            }
+            when (destination.id) {
+                R.id.navigation_feelings -> {
+                    activityToolbar.visibility = View.VISIBLE
+                }
+                else -> {
+                    activityToolbar.visibility = View.GONE
+                }
+            }
+        }
     }
 
     override fun onRequestPermissionsResult(

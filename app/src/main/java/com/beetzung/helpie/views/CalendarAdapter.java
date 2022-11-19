@@ -41,7 +41,6 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
 
     @Override
     public int getItemCount() {
-        Log.d("HELPIELOG", "getItemCount: " + daysOfMonth.size());
         return daysOfMonth.size();
     }
 

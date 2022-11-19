@@ -20,11 +20,12 @@ class HelpieModule {
     @Provides
     @Singleton
     fun provideRecognitionApi(): RecognitionApi {
-        return if (BuildConfig.DEBUG) {
-            RecognitionApiDebug()
-        } else {
-            RecognitionApiImpl()
-        }
+        return RecognitionApiDebug()
+//        return if (BuildConfig.DEBUG) {
+//            RecognitionApiDebug()
+//        } else {
+//            RecognitionApiImpl()
+//        } TODO add real api
     }
 
     @Provides
