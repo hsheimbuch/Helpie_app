@@ -1,5 +1,6 @@
-package com.beetzung.helpie.data
+package com.beetzung.helpie.data.model.implementation
 
+import com.beetzung.helpie.data.RecognitionApi
 import com.beetzung.helpie.data.model.Emotion
 
 class RecognitionApiImpl: RecognitionApi {
