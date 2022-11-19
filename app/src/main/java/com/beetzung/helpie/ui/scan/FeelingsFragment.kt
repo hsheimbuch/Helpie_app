@@ -3,8 +3,10 @@ package com.beetzung.helpie.ui.scan
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.beetzung.helpie.R
+import com.beetzung.helpie.core.onDisplayed
 import com.beetzung.helpie.data.model.Emotion
 import com.beetzung.helpie.databinding.FragmentFeelingsBinding
 import com.beetzung.helpie.ui.BaseFragment
@@ -22,50 +24,33 @@ class FeelingsFragment : BaseFragment(R.layout.fragment_feelings) {
     }
 
     private fun FragmentFeelingsBinding.setupView(emotion: Emotion) {
+        val emotionAdapter = EmotionAdapter(emotion)
+        feelingsCardEmotionRecycler.adapter = emotionAdapter
+        feelingsCardEmotionRecycler.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        feelingsCardEmotionRecycler.onDisplayed {
+            feelingsCardEmotionRecycler.scrollToPosition(emotionAdapter.selectedEmotion.ordinal)
+        }
+        feelingsButton.setOnClickListener {
+            viewModel.sendAnswers(emotionAdapter.selectedEmotion)
+        }
+        
         val listener = ChipGroup.OnCheckedStateChangeListener { _, _ ->
             if (checkChips()) {
                 feelingsButton.isEnabled = true
             }
         }
         feelingsCardHowLongChipGroup.setOnCheckedStateChangeListener(listener)
-        feelingsCardEmotionChipGroup.setOnCheckedStateChangeListener(listener)
-        feelingsButton.setOnClickListener {
-            viewModel.sendAnswers()
-        }
-        when (emotion) {
-            Emotion.HAPPY -> {
-                feelingsCardEmotionChipGroup.check(R.id.feelings_chip_happy)
-            }
-            Emotion.SAD -> {
-                feelingsCardEmotionChipGroup.check(R.id.feelings_chip_sad)
-            }
-            Emotion.ANGRY -> {
-                feelingsCardEmotionChipGroup.check(R.id.feelings_chip_angry)
-            }
-            Emotion.NEUTRAL -> {
-                feelingsCardEmotionChipGroup.check(R.id.feelings_chip_neutral)
-            }
-            Emotion.FEAR -> {
-                feelingsCardEmotionChipGroup.check(R.id.feelings_chip_fear)
-            }
-            Emotion.DISGUST -> {
-                feelingsCardEmotionChipGroup.check(R.id.feelings_chip_disgust)
-            }
-            Emotion.SURPRISE -> {
-                feelingsCardEmotionChipGroup.check(R.id.feelings_chip_surprise)
-            }
-        }
     }
 
 
 
     private fun FragmentFeelingsBinding.checkChips(): Boolean {
-        if (feelingsCardHowLongChipGroup.checkedChipId != -1) {
-            if (feelingsCardEmotionChipGroup.checkedChipId != -1) {
+//        if (feelingsCardHowLongChipGroup.checkedChipId != -1) {
+//            if (feelingsCardEmotionChipGroup.checkedChipId != -1) {
                 return true
-            }
-        }
-        return false
+//            }
+//        }
+//        return false
     }
 }
 

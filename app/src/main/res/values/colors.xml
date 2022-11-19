@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="black">#FF000000</color>
+    <color name="black15">#26000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="white50">#80FFFFFF</color>
-    
+
     <color name="surface">#17233A</color>
+    <color name="surface80">#CC17233A</color>
     <color name="background">#0A162F</color>
     <color name="primary">#BCCAE7</color>
     <color name="primary_disabled">#4DBCCAE7</color>
@@ -12,4 +14,12 @@
     <color name="text_on_surface">@color/white</color>
     <color name="text_on_secondary">#BCCAE7</color>
     <color name="text_on_secondary_inactive">#9095b0</color>
+
+    <color name="emotion_angry">#8C4242</color>
+    <color name="emotion_happy">#39D665</color>
+    <color name="emotion_sad">#5E5D5B</color>
+    <color name="emotion_fear">#3B2F4A</color>
+    <color name="emotion_disgust">#667C41</color>
+    <color name="emotion_surprise">#FF00FF</color>
+    <color name="emotion_neutral">#FFFFFF</color>
 </resources>

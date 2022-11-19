@@ -1,5 +1,7 @@
 package com.beetzung.helpie.core
 
+import android.view.View
+import android.view.ViewTreeObserver
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
@@ -12,7 +14,8 @@ import java.time.YearMonth
 
 val AppCompatActivity.currentFragment: BaseFragment?
     get() {
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.activity_nav_host_fragment)
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.activity_nav_host_fragment)
         return navHostFragment?.childFragmentManager?.fragments?.get(0) as? BaseFragment
     }
 
@@ -63,4 +66,13 @@ fun getDaysInMonthArray(): ArrayList<String?> {
         }
     }
     return daysInMonthArray
+}
+
+fun View.onDisplayed(callback: () -> Unit) {
+    viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
+        override fun onGlobalLayout() {
+            callback.invoke()
+            viewTreeObserver.removeOnGlobalLayoutListener(this)
+        }
+    })
 }

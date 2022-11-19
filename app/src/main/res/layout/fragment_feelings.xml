@@ -27,12 +27,26 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/feelings_card_emotion_recycler"
+            tools:listitem="@layout/recycler_item_emotion"
+            tools:layout_height="100dp"
+            tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/feelings_card_emotion_title"
+            app:singleSelection="true" />
+
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/feelings_card_emotion_chip_group"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="8dp"
             android:layout_marginTop="8dp"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/feelings_card_emotion_title"
@@ -88,7 +102,7 @@
             android:layout_height="1dp"
             android:layout_marginTop="12dp"
             android:background="@color/background"
-            app:layout_constraintTop_toBottomOf="@id/feelings_card_emotion_chip_group" />
+            app:layout_constraintTop_toBottomOf="@id/feelings_card_emotion_recycler" />
 
         <TextView
             android:layout_width="wrap_content"

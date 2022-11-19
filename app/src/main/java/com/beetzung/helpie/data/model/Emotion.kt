@@ -9,3 +9,13 @@ enum class Emotion {
     SURPRISE,
     NEUTRAL
 }
+
+fun fromNumber(int: Int) = when (int) {
+    0 -> Emotion.ANGRY
+    1 -> Emotion.DISGUST
+    2 -> Emotion.FEAR
+    3 -> Emotion.HAPPY
+    4 -> Emotion.SAD
+    5 -> Emotion.SURPRISE
+    else -> Emotion.NEUTRAL
+}

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_marginHorizontal="14dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <View
+            android:id="@+id/emotion_background"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/circle" />
+
+        <ImageView
+            android:id="@+id/emotion_emoji"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/emoji_angry" />
+
+        <View
+            android:visibility="gone"
+            android:id="@+id/emotion_shadow"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/circle"
+            android:backgroundTint="@color/surface80"/>
+    </FrameLayout>
+
+    <TextView
+        android:layout_marginTop="7dp"
+        android:id="@+id/emotion_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textColor="#FFFFFF"
+        android:textSize="12sp"
+        tools:text="Angry" />
+</LinearLayout>
