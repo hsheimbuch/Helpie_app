@@ -16,7 +16,6 @@ abstract class BaseFragment(@LayoutRes id: Int): Fragment(id) {
         if (dialog?.isShowing == true) {
             return
         }
-        val context = ContextThemeWrapper(requireContext(), R.style.Helpie)
         dialog = AlertDialog.Builder(context)
             .setView(ProgressBar(context))
             .setCancelable(false)
