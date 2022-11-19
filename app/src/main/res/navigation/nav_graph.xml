@@ -3,28 +3,34 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph.xml"
-    app:startDestination="@id/mainFragment">
+    app:startDestination="@id/navigation_home">
 
     <fragment
-        android:id="@+id/mainFragment"
+        android:id="@+id/navigation_home"
         android:name="com.beetzung.helpie.ui.main.MainFragment"
         android:label="fragment_main"
-        tools:layout="@layout/fragment_main" />
-    <fragment
-        android:id="@+id/cameraFragment"
-        android:name="com.beetzung.helpie.ui.scan.CameraFragment"
-        android:label="fragment_camera"
-        tools:layout="@layout/fragment_camera" >
+        tools:layout="@layout/fragment_main">
         <action
-            android:id="@+id/action_cameraFragment_to_feelingsFragment"
-            app:destination="@id/feelingsFragment" />
+            android:id="@+id/action_mainFragment_to_cameraFragment"
+            app:destination="@id/navigation_camera" />
     </fragment>
     <fragment
-        android:id="@+id/feelingsFragment"
+        android:id="@+id/navigation_camera"
+        android:name="com.beetzung.helpie.ui.scan.CameraFragment"
+        android:label="fragment_camera"
+        tools:layout="@layout/fragment_camera">
+        <action
+            android:id="@+id/action_cameraFragment_to_feelingsFragment"
+            app:destination="@id/navigation_feelings" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_feelings"
         android:name="com.beetzung.helpie.ui.scan.FeelingsFragment"
         android:label="fragment_feelings"
         tools:layout="@layout/fragment_feelings" />
-    <action
-        android:id="@+id/action_global_cameraFragment"
-        app:destination="@id/cameraFragment" />
+    <fragment
+        android:id="@+id/navigation_settings"
+        android:name="com.beetzung.helpie.ui.scan.FeelingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_feelings" />
 </navigation>

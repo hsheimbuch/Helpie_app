@@ -9,5 +9,10 @@
     <color name="white">#FFFFFFFF</color>
     
     <color name="surface">#17233A</color>
+    <color name="background">#0A162F</color>
     <color name="primary">#BCCAE7</color>
+    <color name="secondary">#17233A</color>
+    <color name="text_on_surface">@color/white</color>
+    <color name="text_on_secondary">#BCCAE7</color>
+    <color name="text_on_secondary_inactive">#9095b0</color>
 </resources>
