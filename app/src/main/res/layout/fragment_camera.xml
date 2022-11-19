@@ -8,12 +8,12 @@
     tools:context=".ui.scan.CameraFragment">
 
     <androidx.camera.view.PreviewView
-        android:id="@+id/viewFinder"
+        android:id="@+id/camera_preview"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
     <Button
-        android:id="@+id/image_capture_button"
+        android:id="@+id/camera_button_capture"
         android:layout_width="110dp"
         android:layout_height="110dp"
         android:layout_marginBottom="50dp"
@@ -22,10 +22,10 @@
         android:text="CAPTURE"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/vertical_centerline" />
+        app:layout_constraintEnd_toStartOf="@id/camera_vertical_centerline" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/vertical_centerline"
+        android:id="@+id/camera_vertical_centerline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
