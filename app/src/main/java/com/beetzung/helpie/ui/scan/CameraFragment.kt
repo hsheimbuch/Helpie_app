@@ -6,9 +6,9 @@ import androidx.fragment.app.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.beetzung.helpie.R
 import com.beetzung.helpie.databinding.FragmentCameraBinding
-import com.beetzung.helpie.tools.PermissionType
-import com.beetzung.helpie.tools.checkPermission
-import com.beetzung.helpie.tools.requestPermissions
+import com.beetzung.helpie.core.PermissionType
+import com.beetzung.helpie.core.checkPermission
+import com.beetzung.helpie.core.requestPermissions
 import com.beetzung.helpie.ui.BaseFragment
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors

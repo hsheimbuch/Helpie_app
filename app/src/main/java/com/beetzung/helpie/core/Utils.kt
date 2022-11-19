@@ -1,4 +1,4 @@
-package com.beetzung.helpie.tools
+package com.beetzung.helpie.core
 
 import androidx.appcompat.app.AppCompatActivity
 import com.beetzung.helpie.R

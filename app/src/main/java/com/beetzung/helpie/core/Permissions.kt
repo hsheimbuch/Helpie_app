@@ -1,4 +1,4 @@
-package com.beetzung.helpie.tools
+package com.beetzung.helpie.core
 
 import android.Manifest.permission.CAMERA
 import android.Manifest.permission.RECORD_AUDIO

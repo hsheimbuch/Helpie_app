@@ -3,10 +3,10 @@ package com.beetzung.helpie.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.beetzung.helpie.R
-import com.beetzung.helpie.tools.PermissionType
-import com.beetzung.helpie.tools.Permissions.REQUEST_CAMERA_PERMISSIONS
-import com.beetzung.helpie.tools.checkPermission
-import com.beetzung.helpie.tools.currentFragment
+import com.beetzung.helpie.core.PermissionType
+import com.beetzung.helpie.core.Permissions.REQUEST_CAMERA_PERMISSIONS
+import com.beetzung.helpie.core.checkPermission
+import com.beetzung.helpie.core.currentFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
