@@ -1,13 +1,159 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.scan.FeelingsFragment">
 
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/feelings_card_emotion"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:background="@drawable/card_background"
+        android:paddingVertical="8dp"
+        app:layout_constraintTop_toTopOf="parent">
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/feelings_card_emotion_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="@string/text_helpie_recognized_your_moood"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/feelings_card_emotion_chip_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/feelings_card_emotion_title">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/feelings_chip_angry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Angry" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/feelings_chip_disgust"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Disgust" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/feelings_chip_fear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fear" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/feelings_chip_sad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sad" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/feelings_chip_positive"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Positive" />
+        </com.google.android.material.chip.ChipGroup>
+
+        <View
+            android:id="@+id/feelings_card_emotion_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="12dp"
+            android:background="@color/background"
+            app:layout_constraintTop_toBottomOf="@id/feelings_card_emotion_chip_group" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/text_tap_to_change"
+            android:textColor="@color/white50"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/feelings_card_emotion_divider" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/feelings_card_how_long"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/card_background"
+        android:paddingVertical="8dp"
+        android:paddingBottom="12dp"
+        app:layout_constraintTop_toBottomOf="@id/feelings_card_emotion">
+
+        <TextView
+            android:id="@+id/feelings_card_how_long_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="@string/text_how_long_this_state"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/feelings_card_how_long_chip_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/feelings_card_how_long_title">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/feelings_chip_1_2_days"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1-2 days" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/feelings_chip_2days_2weeks"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2 days - 2 weeks" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/feelings_chip_more"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="More" />
+
+        </com.google.android.material.chip.ChipGroup>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/main_button"
+        style="@style/HelpieButton"
+        android:layout_width="312dp"
+        android:layout_height="57dp"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/button_save_and_see_advices"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
