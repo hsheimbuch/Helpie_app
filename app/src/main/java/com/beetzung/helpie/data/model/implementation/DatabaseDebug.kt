@@ -53,6 +53,7 @@ class DatabaseDebug(context: Context) : Database {
             {
                 "timestamp": $timestamp,
                 "emotion": $emotion,
+                "cardNumber": $cardNumber,
                 "text": $text
             }
         """.trimIndent()
@@ -62,8 +63,9 @@ class DatabaseDebug(context: Context) : Database {
         val timestamp = json.substringAfter("timestamp: ").substringBefore(",").toLong()
         val emotion =
             json.substringAfter("emotion: ").substringBefore(",").let { Emotion.valueOf(it) }
+        val cardNumber = json.substringAfter("cardNumber: ").substringBefore(",").toInt()
         val text = json.substringAfter("text: ").substringBefore("}")
             .let { if (it == "null") null else it }
-        return Record(timestamp, emotion, text)
+        return Record(timestamp, emotion, cardNumber, text)
     }
 }
