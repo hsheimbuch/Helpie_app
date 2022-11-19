@@ -2,6 +2,7 @@ package com.beetzung.helpie.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
@@ -21,13 +22,18 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         binding = ActivityMainBinding.bind(findViewById(R.id.root_view))
         binding.setupView()
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.navigation_dashboard,
+                R.id.navigation_home,
+                R.id.navigation_settings -> binding.activityNavView.visibility = View.VISIBLE
+                else ->
+                    binding.activityNavView.visibility = View.GONE
+            }
+        }
     }
 
     private fun ActivityMainBinding.setupView() {
-//        val appBarConfiguration = AppBarConfiguration(
-//            setOf(R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_settings)
-//        )
-//        setupActionBarWithNavController(this@MainActivity, navController, appBarConfiguration)
         activityNavView.setupWithNavController(navController)
     }
 
