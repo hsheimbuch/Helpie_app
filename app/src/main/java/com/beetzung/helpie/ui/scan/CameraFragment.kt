@@ -19,12 +19,13 @@ import com.beetzung.helpie.R
 import com.beetzung.helpie.core.*
 import com.beetzung.helpie.databinding.FragmentCameraBinding
 import com.beetzung.helpie.ui.BaseFragment
+import dagger.hilt.android.AndroidEntryPoint
 import java.io.ByteArrayOutputStream
 import java.io.InputStream
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
-
+@AndroidEntryPoint
 class CameraFragment : BaseFragment(R.layout.fragment_camera) {
     private val binding: FragmentCameraBinding by viewBinding(FragmentCameraBinding::bind)
     private val viewModel: CameraViewModel by viewModels()
@@ -59,6 +60,9 @@ class CameraFragment : BaseFragment(R.layout.fragment_camera) {
             if (checkPermission(PermissionType.CAMERA)) {
                 takePhoto()
             } // TODO ???
+        }
+        cameraButtonClose.setOnClickListener {
+            pop()
         }
     }
 
@@ -96,10 +100,10 @@ class CameraFragment : BaseFragment(R.layout.fragment_camera) {
             }
         }
         val outputOptions = ImageCapture.OutputFileOptions.Builder(
-                requireActivity().contentResolver,
-                MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                contentValues
-            )
+            requireActivity().contentResolver,
+            MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+            contentValues
+        )
             .build()
         val callback = object : ImageCapture.OnImageSavedCallback {
             override fun onError(exc: ImageCaptureException) {
@@ -115,11 +119,16 @@ class CameraFragment : BaseFragment(R.layout.fragment_camera) {
                 }
             }
         }
-        imageCapture.takePicture(outputOptions, ContextCompat.getMainExecutor(requireContext()), callback)
+        imageCapture.takePicture(
+            outputOptions,
+            ContextCompat.getMainExecutor(requireContext()),
+            callback
+        )
     }
 
     private fun getImageBytes(uri: Uri): ByteArray? {
-        val inputStream: InputStream = requireActivity().contentResolver.openInputStream(uri) ?: return null
+        val inputStream: InputStream =
+            requireActivity().contentResolver.openInputStream(uri) ?: return null
         val byteBuffer = ByteArrayOutputStream()
         val buffer = ByteArray(1024)
         var len: Int

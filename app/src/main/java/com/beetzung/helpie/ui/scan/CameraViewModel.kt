@@ -25,7 +25,6 @@ class CameraViewModel @Inject constructor(
             }.onFailure {
                 _imageSent.value = DataEvent(null)
             }
-
         }
     }
 }
