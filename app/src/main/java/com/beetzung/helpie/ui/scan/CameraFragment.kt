@@ -1,23 +1,29 @@
 package com.beetzung.helpie.ui.scan
 
+import android.content.ContentValues
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
+import android.view.View
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
+import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.beetzung.helpie.R
+import com.beetzung.helpie.core.*
 import com.beetzung.helpie.databinding.FragmentCameraBinding
-import com.beetzung.helpie.core.PermissionType
-import com.beetzung.helpie.core.TAG
-import com.beetzung.helpie.core.checkPermission
-import com.beetzung.helpie.core.requestPermissions
 import com.beetzung.helpie.ui.BaseFragment
+import java.io.ByteArrayOutputStream
+import java.io.InputStream
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
+
 
 class CameraFragment : BaseFragment(R.layout.fragment_camera) {
     private val binding: FragmentCameraBinding by viewBinding(FragmentCameraBinding::bind)
@@ -26,13 +32,33 @@ class CameraFragment : BaseFragment(R.layout.fragment_camera) {
     private var imageCapture: ImageCapture? = null
     private lateinit var cameraExecutor: ExecutorService
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         cameraExecutor = Executors.newSingleThreadExecutor()
         if (checkPermission(PermissionType.CAMERA)) {
             startCamera()
         } else {
             requestPermissions(PermissionType.CAMERA)
+        }
+        binding.setupView()
+        viewModel.imageSent.observe(viewLifecycleOwner) { event ->
+            event.handle { emotion ->
+                emotion?.let {
+                    navController.navigate(CameraFragmentDirections.actionCameraFragmentToFeelingsFragment())
+                } ?: showBadFaceDialog()
+            }
+        }
+    }
+
+    private fun showBadFaceDialog() {
+        // TODO add dialog
+    }
+
+    private fun FragmentCameraBinding.setupView() {
+        cameraButtonCapture.setOnClickListener {
+            if (checkPermission(PermissionType.CAMERA)) {
+                takePhoto()
+            } // TODO ???
         }
     }
 
@@ -49,11 +75,58 @@ class CameraFragment : BaseFragment(R.layout.fragment_camera) {
             try {
                 cameraProvider.unbindAll()
                 cameraProvider.bindToLifecycle(this, cameraSelector, preview)
-            } catch(exc: Exception) {
+            } catch (exc: Exception) {
                 Log.e(TAG, "Use case binding failed", exc)
             }
         }
-        cameraProviderFuture.addListener(cameraListener, ContextCompat.getMainExecutor(requireContext()))
+        cameraProviderFuture.addListener(
+            cameraListener,
+            ContextCompat.getMainExecutor(requireContext())
+        )
+    }
+
+    private fun takePhoto() {
+        val imageCapture = imageCapture ?: return
+        val name = System.currentTimeMillis().toString() + ".jpg"
+        val contentValues = ContentValues().apply {
+            put(MediaStore.MediaColumns.DISPLAY_NAME, name)
+            put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
+            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
+                put(MediaStore.Images.Media.RELATIVE_PATH, "Pictures/CameraX-Image")
+            }
+        }
+        val outputOptions = ImageCapture.OutputFileOptions.Builder(
+                requireActivity().contentResolver,
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                contentValues
+            )
+            .build()
+        val callback = object : ImageCapture.OnImageSavedCallback {
+            override fun onError(exc: ImageCaptureException) {
+                Log.e(TAG, "Photo capture failed: ${exc.message}", exc)
+            }
+
+            override fun onImageSaved(output: ImageCapture.OutputFileResults) {
+                val msg = "Photo capture succeeded: ${output.savedUri}"
+                Log.d(TAG, msg)
+                output.savedUri?.let { uri ->
+                    val bytes = getImageBytes(uri) ?: return //TODO ??
+                    viewModel.sendImage(bytes)
+                }
+            }
+        }
+        imageCapture.takePicture(outputOptions, ContextCompat.getMainExecutor(requireContext()), callback)
+    }
+
+    private fun getImageBytes(uri: Uri): ByteArray? {
+        val inputStream: InputStream = requireActivity().contentResolver.openInputStream(uri) ?: return null
+        val byteBuffer = ByteArrayOutputStream()
+        val buffer = ByteArray(1024)
+        var len: Int
+        while (inputStream.read(buffer).also { len = it } != -1) {
+            byteBuffer.write(buffer, 0, len)
+        }
+        return byteBuffer.toByteArray()
     }
 
     override fun onDestroy() {
