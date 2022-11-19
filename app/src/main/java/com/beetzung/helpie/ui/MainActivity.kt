@@ -1,9 +1,8 @@
-package com.beetzung.helpie
+package com.beetzung.helpie.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.activity.viewModels
-import androidx.lifecycle.ViewModel
+import com.beetzung.helpie.R
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
