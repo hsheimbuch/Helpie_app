@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
@@ -32,6 +33,7 @@ class CameraFragment : BaseFragment(R.layout.fragment_camera) {
 
     private var imageCapture: ImageCapture? = null
     private lateinit var cameraExecutor: ExecutorService
+    private lateinit var cameraProvider: ProcessCameraProvider
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -70,18 +72,22 @@ class CameraFragment : BaseFragment(R.layout.fragment_camera) {
     private fun startCamera() {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(requireContext())
         val cameraListener = Runnable {
-            val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
+            if (!this::cameraProvider.isInitialized) {
+                cameraProvider = cameraProviderFuture.get()
+            }
             val preview = Preview.Builder()
                 .build()
                 .also {
                     it.setSurfaceProvider(binding.cameraPreview.surfaceProvider)
                 }
+            imageCapture = ImageCapture.Builder().build()
             val cameraSelector = CameraSelector.DEFAULT_FRONT_CAMERA
             try {
                 cameraProvider.unbindAll()
-                cameraProvider.bindToLifecycle(this, cameraSelector, preview)
+                cameraProvider.bindToLifecycle(this, cameraSelector, preview, imageCapture)
             } catch (exc: Exception) {
                 Log.e(TAG, "Use case binding failed", exc)
+                onError(exc.message)
             }
         }
         cameraProviderFuture.addListener(
@@ -90,8 +96,21 @@ class CameraFragment : BaseFragment(R.layout.fragment_camera) {
         )
     }
 
+    private fun pauseCamera() {
+        cameraProvider.unbindAll()
+    }
+
+    private fun onError(text: String?) {
+        hideLoadingDialog()
+        Toast.makeText(requireContext(), text ?: "Unknown error", Toast.LENGTH_SHORT).show()
+        startCamera()
+    }
+
     private fun takePhoto() {
-        val imageCapture = imageCapture ?: return
+        Log.d(TAG, "takePhoto start")
+        showLoadingDialog()
+
+        val imageCapture = imageCapture ?: return onError("Image capture is null")
         val name = System.currentTimeMillis().toString() + ".jpg"
         val contentValues = ContentValues().apply {
             put(MediaStore.MediaColumns.DISPLAY_NAME, name)
@@ -109,16 +128,17 @@ class CameraFragment : BaseFragment(R.layout.fragment_camera) {
         val callback = object : ImageCapture.OnImageSavedCallback {
             override fun onError(exc: ImageCaptureException) {
                 Log.e(TAG, "Photo capture failed: ${exc.message}", exc)
+                onError(exc.message)
             }
 
             override fun onImageSaved(output: ImageCapture.OutputFileResults) {
                 val msg = "Photo capture succeeded: ${output.savedUri}"
+                pauseCamera()
                 Log.d(TAG, msg)
                 output.savedUri?.let { uri ->
-                    val bytes = getImageBytes(uri) ?: return Log.e(TAG, "Photo capture: no Input Stream").let { }//TODO ??
-                    showLoadingDialog()
+                    val bytes = getImageBytes(uri) ?: return onError("Image is null")
                     viewModel.sendImage(bytes)
-                } ?: Log.e(TAG, "Photo capture: no URI")
+                } ?: onError("Uri is null")
             }
         }
         imageCapture.takePicture(
