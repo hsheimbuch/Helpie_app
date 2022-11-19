@@ -44,6 +44,7 @@ class CameraFragment : BaseFragment(R.layout.fragment_camera) {
         binding.setupView()
         viewModel.imageSent.observe(viewLifecycleOwner) { event ->
             event.handle { emotion ->
+                hideLoadingDialog()
                 emotion?.let {
                     navController.navigate(CameraFragmentDirections.actionCameraFragmentToFeelingsFragment())
                 } ?: showBadFaceDialog()
@@ -114,9 +115,10 @@ class CameraFragment : BaseFragment(R.layout.fragment_camera) {
                 val msg = "Photo capture succeeded: ${output.savedUri}"
                 Log.d(TAG, msg)
                 output.savedUri?.let { uri ->
-                    val bytes = getImageBytes(uri) ?: return //TODO ??
+                    val bytes = getImageBytes(uri) ?: return Log.e(TAG, "Photo capture: no Input Stream").let { }//TODO ??
+                    showLoadingDialog()
                     viewModel.sendImage(bytes)
-                }
+                } ?: Log.e(TAG, "Photo capture: no URI")
             }
         }
         imageCapture.takePicture(
