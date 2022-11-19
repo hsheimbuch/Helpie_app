@@ -1,18 +1,28 @@
 package com.beetzung.helpie.ui.scan
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.beetzung.helpie.data.Database
+import com.beetzung.helpie.data.LocationService
 import com.beetzung.helpie.data.RecognitionApi
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class FeelingsViewModel @Inject constructor(
+    savedStateHandle: SavedStateHandle,
     private val database: Database,
-    private val recognitionApi: RecognitionApi
+    private val recognitionApi: RecognitionApi,
+    private val locationService: LocationService
 ): ViewModel() {
 
-    fun sendAnswers() {
+    private val emotion = FeelingsFragmentArgs.fromSavedStateHandle(savedStateHandle).emotion
 
+    fun sendAnswers() {
+        viewModelScope.launch {
+            val countryCode = locationService.getCountryCode()
+        }
     }
 }
