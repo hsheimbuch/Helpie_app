@@ -27,10 +27,19 @@
         android:id="@+id/navigation_feelings"
         android:name="com.beetzung.helpie.ui.scan.FeelingsFragment"
         android:label="fragment_feelings"
-        tools:layout="@layout/fragment_feelings" />
+        tools:layout="@layout/fragment_feelings" >
+        <action
+            android:id="@+id/action_navigation_feelings_to_navigation_advice"
+            app:destination="@id/navigation_advice" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_settings"
         android:name="com.beetzung.helpie.ui.scan.FeelingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_feelings" />
+    <fragment
+        android:id="@+id/navigation_advice"
+        android:name="com.beetzung.helpie.ui.advice.AdviceFragment"
+        android:label="fragment_advice"
+        tools:layout="@layout/fragment_advice" />
 </navigation>
