@@ -8,7 +8,6 @@
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.beetzung.helpie.ui.main.MainFragment"
-        android:label="fragment_main"
         tools:layout="@layout/fragment_main">
         <action
             android:id="@+id/action_mainFragment_to_cameraFragment"
@@ -17,7 +16,6 @@
     <fragment
         android:id="@+id/navigation_camera"
         android:name="com.beetzung.helpie.ui.scan.CameraFragment"
-        android:label="fragment_camera"
         tools:layout="@layout/fragment_camera">
         <action
             android:id="@+id/action_cameraFragment_to_feelingsFragment"
@@ -26,11 +24,12 @@
     <fragment
         android:id="@+id/navigation_feelings"
         android:name="com.beetzung.helpie.ui.scan.FeelingsFragment"
-        android:label="fragment_feelings"
+        android:label="@string/title_feelings"
         tools:layout="@layout/fragment_feelings" >
         <action
             android:id="@+id/action_navigation_feelings_to_navigation_advice"
-            app:destination="@id/navigation_advice" />
+            app:destination="@id/navigation_advice"
+            app:popUpTo="@id/navigation_home" />
         <argument
             android:name="emotion"
             app:argType="com.beetzung.helpie.data.model.Emotion" />
@@ -43,7 +42,7 @@
     <fragment
         android:id="@+id/navigation_advice"
         android:name="com.beetzung.helpie.ui.advice.AdviceFragment"
-        android:label="fragment_advice"
+        android:label="@string/title_advice"
         tools:layout="@layout/fragment_advice" >
         <argument
             android:name="record"

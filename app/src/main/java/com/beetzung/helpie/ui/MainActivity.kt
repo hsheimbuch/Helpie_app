@@ -46,6 +46,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             when (destination.id) {
+                R.id.navigation_advice,
                 R.id.navigation_feelings -> {
                     activityToolbar.visibility = View.VISIBLE
                 }

@@ -26,6 +26,7 @@ class FeelingsFragment : BaseFragment(R.layout.fragment_feelings) {
         binding.setupView(FeelingsFragmentArgs.fromBundle(requireArguments()).emotion)
         viewModel.recordMade.observe(viewLifecycleOwner) { event ->
             event.handle { record ->
+                hideLoadingDialog()
                 record?.let(this@FeelingsFragment::navigateToAdvice) ?: showError()
             }
         }
@@ -49,6 +50,7 @@ class FeelingsFragment : BaseFragment(R.layout.fragment_feelings) {
             feelingsCardEmotionRecycler.scrollToPosition(emotionAdapter.selectedEmotion.ordinal)
         }
         feelingsButton.setOnClickListener {
+            showLoadingDialog()
             viewModel.sendAnswers(emotionAdapter.selectedEmotion, feelingsSeekBar.progress)
         }
     }

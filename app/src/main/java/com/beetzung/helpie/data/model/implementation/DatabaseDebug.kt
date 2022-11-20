@@ -2,7 +2,9 @@ package com.beetzung.helpie.data.model.implementation
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
 import androidx.core.content.edit
+import com.beetzung.helpie.core.TAG
 import com.beetzung.helpie.data.Database
 import com.beetzung.helpie.data.model.DaysData
 import com.beetzung.helpie.data.model.Emotion
@@ -60,11 +62,12 @@ class DatabaseDebug(context: Context) : Database {
     }
 
     private fun toRecord(json: String): Record {
-        val timestamp = json.substringAfter("timestamp: ").substringBefore(",").toLong()
+        Log.d(TAG, "toRecord: $json")
+        val timestamp = json.substringAfter("timestamp\": ").substringBefore(",").toLong()
         val emotion =
-            json.substringAfter("emotion: ").substringBefore(",").let { Emotion.valueOf(it) }
-        val cardNumber = json.substringAfter("cardNumber: ").substringBefore(",").toInt()
-        val text = json.substringAfter("text: ").substringBefore("}")
+            json.substringAfter("emotion\": ").substringBefore(",").let { Emotion.valueOf(it) }
+        val cardNumber = json.substringAfter("cardNumber\": ").substringBefore(",").toInt()
+        val text = json.substringAfter("text\": ").substringBefore("}")
             .let { if (it == "null") null else it }
         return Record(timestamp, emotion, cardNumber, text)
     }
