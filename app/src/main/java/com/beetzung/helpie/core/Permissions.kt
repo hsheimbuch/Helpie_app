@@ -36,7 +36,7 @@ object Permissions {
     const val REQUEST_CAMERA_PERMISSIONS = 10
 
     val CAMERA_PERMISSIONS =
-        mutableListOf(CAMERA, RECORD_AUDIO).apply {
+        mutableListOf(CAMERA).apply {
             if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.P) {
                 add(WRITE_EXTERNAL_STORAGE)
             }
