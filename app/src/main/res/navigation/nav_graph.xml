@@ -44,5 +44,9 @@
         android:id="@+id/navigation_advice"
         android:name="com.beetzung.helpie.ui.advice.AdviceFragment"
         android:label="fragment_advice"
-        tools:layout="@layout/fragment_advice" />
+        tools:layout="@layout/fragment_advice" >
+        <argument
+            android:name="record"
+            app:argType="com.beetzung.helpie.data.model.Record" />
+    </fragment>
 </navigation>

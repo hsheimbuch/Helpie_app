@@ -7,4 +7,8 @@ class RecognitionApiImpl: RecognitionApi {
     override suspend fun getRecognitionResult(image: ByteArray): Result<Emotion> {
         TODO("Not yet implemented")
     }
+
+    override suspend fun getCards(emotion: Emotion, level: Int, countryCode: String): Result<List<String>> {
+        TODO("Not yet implemented")
+    }
 }
