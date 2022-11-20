@@ -2,10 +2,13 @@ package com.beetzung.helpie.ui.scan
 
 import android.app.AlertDialog
 import android.content.ContentValues
+import android.content.Context
+import android.database.Cursor
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.provider.OpenableColumns
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -20,14 +23,13 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.beetzung.helpie.R
 import com.beetzung.helpie.core.*
 import com.beetzung.helpie.data.model.ApiEmotion
-import com.beetzung.helpie.data.model.Emotion
 import com.beetzung.helpie.databinding.FragmentCameraBinding
 import com.beetzung.helpie.ui.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
-import java.io.ByteArrayOutputStream
-import java.io.InputStream
+import java.io.*
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
+
 
 @AndroidEntryPoint
 class CameraFragment : BaseFragment(R.layout.fragment_camera) {
@@ -146,9 +148,10 @@ class CameraFragment : BaseFragment(R.layout.fragment_camera) {
                 val msg = "Photo capture succeeded: ${output.savedUri}"
                 pauseCamera()
                 Log.d(TAG, msg)
-                output.savedUri?.let { uri ->
-                    val bytes = getImageBytes(uri) ?: return onError("Image is null")
-                    viewModel.sendImage(bytes)
+                output.savedUri?.let {
+//                    val f: File = getFile(it)
+                    val byteArray = getImageBytes(it) ?: return@let null
+                    viewModel.sendImage(it.path!! + ".jpg", byteArray)
                 } ?: onError("Uri is null")
             }
         }
@@ -182,5 +185,44 @@ class CameraFragment : BaseFragment(R.layout.fragment_camera) {
         } else {
             //TODO handle denied permission
         }
+    }
+
+    @Throws(IOException::class)
+    fun getFile(uri: Uri): File {
+        val destinationFilename = File(requireContext().filesDir.path + File.separatorChar + queryName(uri))
+        try {
+            requireContext().contentResolver.openInputStream(uri)?.use { ins ->
+                createFileFromStream(ins, destinationFilename)
+            }
+        } catch (ex: java.lang.Exception) {
+            Log.e("Save File", ex.message!!)
+            ex.printStackTrace()
+        }
+        return destinationFilename
+    }
+
+    private fun createFileFromStream(ins: InputStream, destination: File?) {
+        try {
+            FileOutputStream(destination).use { os ->
+                val buffer = ByteArray(4096)
+                var length: Int
+                while (ins.read(buffer).also { length = it } > 0) {
+                    os.write(buffer, 0, length)
+                }
+                os.flush()
+            }
+        } catch (ex: java.lang.Exception) {
+            Log.e("Save File", ex.message!!)
+            ex.printStackTrace()
+        }
+    }
+
+    private fun queryName(uri: Uri): String {
+        val returnCursor: Cursor = requireContext().contentResolver.query(uri, null, null, null, null)!!
+        val nameIndex: Int = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)
+        returnCursor.moveToFirst()
+        val name: String = returnCursor.getString(nameIndex)
+        returnCursor.close()
+        return name
     }
 }
