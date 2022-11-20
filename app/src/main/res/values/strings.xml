@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
+    <string name="title_favorites">Stats</string>
     <string name="title_settings">Settings</string>
     <string name="title_feelings">Just a couple of questions</string>
     <string name="title_advice">Self-help practice</string>

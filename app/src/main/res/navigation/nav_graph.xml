@@ -36,9 +36,13 @@
     </fragment>
     <fragment
         android:id="@+id/navigation_settings"
-        android:name="com.beetzung.helpie.ui.scan.FeelingsFragment"
+        android:name="com.beetzung.helpie.ui.main.SettingsFragment"
         android:label="fragment_settings"
-        tools:layout="@layout/fragment_feelings" />
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/navigation_favorites"
+        android:name="com.beetzung.helpie.ui.main.FavoritesFragment"
+        tools:layout="@layout/fragment_favorites" />
     <fragment
         android:id="@+id/navigation_advice"
         android:name="com.beetzung.helpie.ui.advice.AdviceFragment"
