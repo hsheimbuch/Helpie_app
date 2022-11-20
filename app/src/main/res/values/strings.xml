@@ -8,5 +8,5 @@
     <string name="button_save_and_see_advices">Save and see advices</string>
     <string name="text_helpie_recognized_your_moood">Helpie recognized your mood as</string>
     <string name="text_tap_to_change">(Tap to change if you don’t feel like it)</string>
-    <string name="text_how_long_this_state">Как долго длится это состояние?</string>
+    <string name="text_how_strong_is_this_emotion">How strong is this emotion?</string>
 </resources>

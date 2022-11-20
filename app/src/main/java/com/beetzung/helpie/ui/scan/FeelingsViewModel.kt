@@ -21,7 +21,7 @@ class FeelingsViewModel @Inject constructor(
 
     private val emotion = FeelingsFragmentArgs.fromSavedStateHandle(savedStateHandle).emotion
 
-    fun sendAnswers(emotion: Emotion) {
+    fun sendAnswers(emotion: Emotion, level: Int) {
         viewModelScope.launch {
             val countryCode = locationService.getCountryCode()
         }

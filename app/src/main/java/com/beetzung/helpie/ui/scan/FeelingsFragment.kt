@@ -1,5 +1,9 @@
 package com.beetzung.helpie.ui.scan
 
+import android.graphics.LinearGradient
+import android.graphics.Shader.TileMode
+import android.graphics.drawable.ShapeDrawable
+import android.graphics.drawable.shapes.RectShape
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
@@ -10,8 +14,8 @@ import com.beetzung.helpie.core.onDisplayed
 import com.beetzung.helpie.data.model.Emotion
 import com.beetzung.helpie.databinding.FragmentFeelingsBinding
 import com.beetzung.helpie.ui.BaseFragment
-import com.google.android.material.chip.ChipGroup
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class FeelingsFragment : BaseFragment(R.layout.fragment_feelings) {
@@ -31,26 +35,8 @@ class FeelingsFragment : BaseFragment(R.layout.fragment_feelings) {
             feelingsCardEmotionRecycler.scrollToPosition(emotionAdapter.selectedEmotion.ordinal)
         }
         feelingsButton.setOnClickListener {
-            viewModel.sendAnswers(emotionAdapter.selectedEmotion)
+            viewModel.sendAnswers(emotionAdapter.selectedEmotion, feelingsSeekBar.progress)
         }
-        
-        val listener = ChipGroup.OnCheckedStateChangeListener { _, _ ->
-            if (checkChips()) {
-                feelingsButton.isEnabled = true
-            }
-        }
-        feelingsCardHowLongChipGroup.setOnCheckedStateChangeListener(listener)
-    }
-
-
-
-    private fun FragmentFeelingsBinding.checkChips(): Boolean {
-//        if (feelingsCardHowLongChipGroup.checkedChipId != -1) {
-//            if (feelingsCardEmotionChipGroup.checkedChipId != -1) {
-                return true
-//            }
-//        }
-//        return false
     }
 }
 
