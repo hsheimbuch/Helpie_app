@@ -18,23 +18,40 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:orientation="horizontal"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/main_button_left"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                app:srcCompat="@drawable/ic_arrow" />
+
             <TextView
                 android:id="@+id/main_text_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="6dp"
                 android:text="Hello World!"
                 android:textColor="@color/text_on_surface"
                 android:textSize="20sp" />
+
+            <ImageButton
+                android:id="@+id/main_button_right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:rotation="180"
+                app:srcCompat="@drawable/ic_arrow" />
         </LinearLayout>
 
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_marginTop="32dp"
-            android:layout_marginHorizontal="8dp"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="32dp"
             android:orientation="horizontal">
 
             <TextView
@@ -44,7 +61,7 @@
                 android:text="Mon"
                 android:textAlignment="center"
                 android:textColor="@color/text_on_surface"
-                android:textSize="16sp"/>
+                android:textSize="16sp" />
 
             <TextView
                 android:layout_width="0dp"
@@ -53,7 +70,7 @@
                 android:text="Tue"
                 android:textAlignment="center"
                 android:textColor="@color/text_on_surface"
-                android:textSize="16sp"/>
+                android:textSize="16sp" />
 
             <TextView
                 android:layout_width="0dp"
@@ -62,7 +79,7 @@
                 android:text="Wed"
                 android:textAlignment="center"
                 android:textColor="@color/text_on_surface"
-                android:textSize="16sp"/>
+                android:textSize="16sp" />
 
             <TextView
                 android:layout_width="0dp"
@@ -71,7 +88,7 @@
                 android:text="Thu"
                 android:textAlignment="center"
                 android:textColor="@color/text_on_surface"
-                android:textSize="16sp"/>
+                android:textSize="16sp" />
 
             <TextView
                 android:layout_width="0dp"
@@ -80,7 +97,7 @@
                 android:text="Fri"
                 android:textAlignment="center"
                 android:textColor="@color/text_on_surface"
-                android:textSize="16sp"/>
+                android:textSize="16sp" />
 
             <TextView
                 android:layout_width="0dp"
@@ -89,7 +106,7 @@
                 android:text="Sat"
                 android:textAlignment="center"
                 android:textColor="@color/text_on_surface"
-                android:textSize="16sp"/>
+                android:textSize="16sp" />
 
             <TextView
                 android:layout_width="0dp"
@@ -98,7 +115,7 @@
                 android:text="Sun"
                 android:textAlignment="center"
                 android:textColor="@color/text_on_surface"
-                android:textSize="16sp"/>
+                android:textSize="16sp" />
 
         </LinearLayout>
 
@@ -108,7 +125,7 @@
             android:layout_height="350dp"
             android:layout_marginTop="32dp"
             tools:itemCount="31"
-            tools:listitem="@layout/calendar_cell" />
+            tools:listitem="@layout/recycler_item_calendar" />
 
     </LinearLayout>
 

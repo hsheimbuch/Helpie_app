@@ -7,6 +7,9 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.beetzung.helpie.R
+import com.beetzung.helpie.core.getEmotionColor
+import com.beetzung.helpie.core.getEmotionDrawable
+import com.beetzung.helpie.core.getEmotionText
 import com.beetzung.helpie.data.model.Emotion
 import com.beetzung.helpie.databinding.RecyclerItemEmotionBinding
 
@@ -30,8 +33,12 @@ class EmotionViewHolder(
 
     fun bind(emotion: Emotion, isSelected: Boolean) {
         this.emotion = emotion
-        binding.emotionText.text = getEmotionText(emotion)
-        binding.emotionBackground.background.setTint(getEmotionColor(emotion))
+        binding.updateView(emotion, isSelected)
+    }
+
+    private fun RecyclerItemEmotionBinding.updateView(emotion: Emotion, isSelected: Boolean) {
+        emotionText.text = getEmotionText(emotion)
+        emotionBackground.background.setTint(getEmotionColor(emotion))
         getEmotionDrawable(emotion)?.let(binding.emotionEmoji::setImageDrawable)
         setSelected(isSelected)
     }
@@ -53,39 +60,5 @@ class EmotionViewHolder(
         ContextCompat.getColor(binding.root.context, R.color.white)
     } else {
         ContextCompat.getColor(binding.root.context, R.color.white50)
-    }
-
-    private fun getEmotionColor(emotion: Emotion): Int {
-        return when (emotion) {
-            Emotion.HAPPY -> R.color.emotion_happy
-            Emotion.SAD -> R.color.emotion_sad
-            Emotion.ANGRY -> R.color.emotion_angry
-            Emotion.NEUTRAL -> R.color.emotion_neutral
-            Emotion.FEAR -> R.color.emotion_fear
-            Emotion.DISGUST -> R.color.emotion_disgust
-            Emotion.SURPRISE -> R.color.emotion_surprise
-        }.let { ContextCompat.getColor(binding.root.context, it) }
-    }
-
-    private fun getEmotionDrawable(emotion: Emotion): Drawable? {
-        return when (emotion) {
-            Emotion.HAPPY -> R.drawable.emoji_happy
-            Emotion.SAD -> R.drawable.emoji_sad
-            Emotion.ANGRY -> R.drawable.emoji_angry
-            Emotion.NEUTRAL -> R.drawable.emoji_happy //TODO change to neutral
-            Emotion.FEAR -> R.drawable.emoji_fear
-            Emotion.DISGUST -> R.drawable.emoji_disgust
-            Emotion.SURPRISE -> R.drawable.emoji_fear //TODO change to surprise
-        }.let { ContextCompat.getDrawable(binding.root.context, it) }
-    }
-
-    private fun getEmotionText(emotion: Emotion) = when (emotion) {
-        Emotion.HAPPY -> "Happy"
-        Emotion.SAD -> "Sad"
-        Emotion.ANGRY -> "Angry"
-        Emotion.NEUTRAL -> "Neutral"
-        Emotion.FEAR -> "Fear"
-        Emotion.DISGUST -> "Disgust"
-        Emotion.SURPRISE -> "Surprise"
     }
 }

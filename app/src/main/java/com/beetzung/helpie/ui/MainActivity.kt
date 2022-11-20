@@ -29,14 +29,14 @@ class MainActivity : AppCompatActivity() {
     private fun ActivityMainBinding.setupView() {
         setSupportActionBar(activityToolbar)
         appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_settings)
+            setOf(R.id.navigation_home, R.id.navigation_favorites, R.id.navigation_settings)
         )
         setupActionBarWithNavController(this@MainActivity, navController, appBarConfiguration)
         activityNavView.setupWithNavController(navController)
         activityToolbar.setupWithNavController(navController, appBarConfiguration)
         navController.addOnDestinationChangedListener { _, destination, b ->
             when (destination.id) {
-                R.id.navigation_dashboard,
+                R.id.navigation_favorites,
                 R.id.navigation_home,
                 R.id.navigation_settings -> {
                     activityNavView.visibility = View.VISIBLE

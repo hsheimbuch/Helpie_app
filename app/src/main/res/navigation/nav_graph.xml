@@ -12,6 +12,9 @@
         <action
             android:id="@+id/action_mainFragment_to_cameraFragment"
             app:destination="@id/navigation_camera" />
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_advice"
+            app:destination="@id/navigation_advice" />
     </fragment>
     <fragment
         android:id="@+id/navigation_camera"
