@@ -13,4 +13,24 @@
     <string name="text_how_strong_is_this_emotion">How strong is this emotion?</string>
     <string name="snackbar_error">Error</string>
     <string name="button_try_again">Try again</string>
+
+    <string name="text_apprehension">Apprehension</string>
+    <string name="text_anxiety">Anxiety</string>
+    <string name="text_panic">Panic</string>
+    <string name="text_melancholy">Melancholy</string>
+    <string name="text_sadness">Sadness</string>
+    <string name="text_grief">Grief</string>
+    <string name="text_annoyance">Annoyance</string>
+    <string name="text_anger">Anger</string>
+    <string name="text_rage">Rage</string>
+    <string name="text_shame">Shame</string>
+    <string name="text_guilt">Guilt</string>
+    <string name="text_disgust">Disgust</string>
+    <string name="text_neutral">Neutral</string>
+    <string name="text_surprised">Surprised</string>
+    <string name="text_happy">Happy</string>
+    <string name="text_positive">Positive</string>
+    <string name="text_angry">Angry</string>
+    <string name="text_fear">Fear</string>
+    <string name="text_sad">Sad</string>
 </resources>

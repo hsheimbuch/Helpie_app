@@ -1,5 +1,6 @@
 package com.beetzung.helpie.ui.scan
 
+import android.app.AlertDialog
 import android.content.ContentValues
 import android.net.Uri
 import android.os.Build
@@ -18,6 +19,7 @@ import androidx.fragment.app.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.beetzung.helpie.R
 import com.beetzung.helpie.core.*
+import com.beetzung.helpie.data.model.ApiEmotion
 import com.beetzung.helpie.data.model.Emotion
 import com.beetzung.helpie.databinding.FragmentCameraBinding
 import com.beetzung.helpie.ui.BaseFragment
@@ -56,10 +58,14 @@ class CameraFragment : BaseFragment(R.layout.fragment_camera) {
     }
 
     private fun showBadFaceDialog() {
-        // TODO add dialog
+        AlertDialog.Builder(requireContext())
+            .setTitle("Bad face")//R.string.bad_face_title)
+            .setMessage("Bad face")//R.string.bad_face_message)
+            .setPositiveButton(R.string.button_try_again, null)
+            .show()
     }
 
-    private fun navigateToFeelingsScreen(emotion: Emotion) {
+    private fun navigateToFeelingsScreen(emotion: ApiEmotion) {
         navController.navigate(CameraFragmentDirections.actionCameraFragmentToFeelingsFragment(emotion))
     }
 

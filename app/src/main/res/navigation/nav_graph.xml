@@ -35,7 +35,7 @@
             app:popUpTo="@id/navigation_home" />
         <argument
             android:name="emotion"
-            app:argType="com.beetzung.helpie.data.model.Emotion" />
+            app:argType="com.beetzung.helpie.data.model.ApiEmotion" />
     </fragment>
     <fragment
         android:id="@+id/navigation_settings"

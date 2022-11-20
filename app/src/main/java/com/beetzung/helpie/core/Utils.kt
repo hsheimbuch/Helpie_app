@@ -12,9 +12,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
 import com.beetzung.helpie.R
 import com.beetzung.helpie.data.model.Emotion
+import com.beetzung.helpie.data.model.PreEmotion
 import com.beetzung.helpie.ui.BaseFragment
-import java.time.LocalDate
-import java.time.YearMonth
 
 val AppCompatActivity.currentFragment: BaseFragment?
     get() {
@@ -64,36 +63,30 @@ fun View.onDisplayed(callback: () -> Unit) {
     })
 }
 
-fun ViewBinding.getEmotionColor(emotion: Emotion): Int {
+fun ViewBinding.getEmotionColor(emotion: PreEmotion): Int {
     return when (emotion) {
-        Emotion.HAPPY -> R.color.emotion_happy
-        Emotion.SAD -> R.color.emotion_sad
-        Emotion.ANGRY -> R.color.emotion_angry
-        Emotion.NEUTRAL -> R.color.emotion_neutral
-        Emotion.FEAR -> R.color.emotion_fear
-        Emotion.DISGUST -> R.color.emotion_disgust
-        Emotion.SURPRISE -> R.color.emotion_surprise
+        PreEmotion.POSITIVE -> R.color.emotion_happy
+        PreEmotion.SAD -> R.color.emotion_sad
+        PreEmotion.ANGRY -> R.color.emotion_angry
+        PreEmotion.FEAR -> R.color.emotion_fear
+        PreEmotion.DISGUST -> R.color.emotion_disgust
     }.let { ContextCompat.getColor(root.context, it) }
 }
 
-fun ViewBinding.getEmotionDrawable(emotion: Emotion): Drawable? {
+fun ViewBinding.getEmotionDrawable(emotion: PreEmotion): Drawable? {
     return when (emotion) {
-        Emotion.HAPPY -> R.drawable.emoji_happy
-        Emotion.SAD -> R.drawable.emoji_sad
-        Emotion.ANGRY -> R.drawable.emoji_angry
-        Emotion.NEUTRAL -> R.drawable.emoji_happy //TODO change to neutral
-        Emotion.FEAR -> R.drawable.emoji_fear
-        Emotion.DISGUST -> R.drawable.emoji_disgust
-        Emotion.SURPRISE -> R.drawable.emoji_fear //TODO change to surprise
+        PreEmotion.SAD -> R.drawable.emoji_sad
+        PreEmotion.ANGRY -> R.drawable.emoji_angry
+        PreEmotion.POSITIVE -> R.drawable.emoji_happy
+        PreEmotion.FEAR -> R.drawable.emoji_fear
+        PreEmotion.DISGUST -> R.drawable.emoji_disgust
     }.let { ContextCompat.getDrawable(root.context, it) }
 }
 
-fun ViewBinding.getEmotionText(emotion: Emotion) = when (emotion) {
-    Emotion.HAPPY -> "Happy"
-    Emotion.SAD -> "Sad"
-    Emotion.ANGRY -> "Angry"
-    Emotion.NEUTRAL -> "Neutral"
-    Emotion.FEAR -> "Fear"
-    Emotion.DISGUST -> "Disgust"
-    Emotion.SURPRISE -> "Surprise"
-}
+fun ViewBinding.getEmotionText(emotion: PreEmotion) = when (emotion) {
+    PreEmotion.POSITIVE -> R.string.text_positive
+    PreEmotion.ANGRY -> R.string.text_angry
+    PreEmotion.DISGUST -> R.string.text_disgust
+    PreEmotion.FEAR -> R.string.text_fear
+    PreEmotion.SAD -> R.string.text_sad
+}.let { root.context.getString(it) }

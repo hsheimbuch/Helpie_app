@@ -42,7 +42,7 @@ class CalendarViewHolder(
                 calendarText.setTextColor(itemView.context.getColor(R.color.white))
             }
             if (emotion != null) {
-                calendarIndicator.background.setTint(getEmotionColor(emotion))
+                calendarIndicator.background.setTint(getEmotionColor(emotion.toPreEmotion()))
                 calendarIndicator.visibility = View.VISIBLE
             } else {
                 calendarIndicator.visibility = View.INVISIBLE

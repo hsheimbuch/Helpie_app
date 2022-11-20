@@ -9,6 +9,7 @@ import com.beetzung.helpie.R
 import com.beetzung.helpie.core.navController
 import com.beetzung.helpie.core.onDisplayed
 import com.beetzung.helpie.data.model.Emotion
+import com.beetzung.helpie.data.model.PreEmotion
 import com.beetzung.helpie.data.model.Record
 import com.beetzung.helpie.databinding.FragmentFeelingsBinding
 import com.beetzung.helpie.ui.BaseFragment
@@ -23,7 +24,7 @@ class FeelingsFragment : BaseFragment(R.layout.fragment_feelings) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.setupView(FeelingsFragmentArgs.fromBundle(requireArguments()).emotion)
+        binding.setupView(FeelingsFragmentArgs.fromBundle(requireArguments()).emotion.toPreEmotion())
         viewModel.recordMade.observe(viewLifecycleOwner) { event ->
             event.handle { record ->
                 hideLoadingDialog()
@@ -42,7 +43,7 @@ class FeelingsFragment : BaseFragment(R.layout.fragment_feelings) {
         }.show()
     }
 
-    private fun FragmentFeelingsBinding.setupView(emotion: Emotion) {
+    private fun FragmentFeelingsBinding.setupView(emotion: PreEmotion) {
         val emotionAdapter = EmotionAdapter(emotion)
         feelingsCardEmotionRecycler.adapter = emotionAdapter
         feelingsCardEmotionRecycler.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)

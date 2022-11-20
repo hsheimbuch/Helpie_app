@@ -11,15 +11,16 @@ import com.beetzung.helpie.core.getEmotionColor
 import com.beetzung.helpie.core.getEmotionDrawable
 import com.beetzung.helpie.core.getEmotionText
 import com.beetzung.helpie.data.model.Emotion
+import com.beetzung.helpie.data.model.PreEmotion
 import com.beetzung.helpie.databinding.RecyclerItemEmotionBinding
 
 class EmotionViewHolder(
     private val binding: RecyclerItemEmotionBinding,
-    private val clickListener: (Emotion) -> Unit
+    private val clickListener: (PreEmotion) -> Unit
 ) :
     RecyclerView.ViewHolder((binding.root)) {
 
-    var emotion: Emotion = Emotion.ANGRY
+    var emotion: PreEmotion = PreEmotion.ANGRY
         private set
 
     var isSelected: Boolean = false
@@ -31,12 +32,12 @@ class EmotionViewHolder(
         }
     }
 
-    fun bind(emotion: Emotion, isSelected: Boolean) {
+    fun bind(emotion: PreEmotion, isSelected: Boolean) {
         this.emotion = emotion
         binding.updateView(emotion, isSelected)
     }
 
-    private fun RecyclerItemEmotionBinding.updateView(emotion: Emotion, isSelected: Boolean) {
+    private fun RecyclerItemEmotionBinding.updateView(emotion: PreEmotion, isSelected: Boolean) {
         emotionText.text = getEmotionText(emotion)
         emotionBackground.background.setTint(getEmotionColor(emotion))
         getEmotionDrawable(emotion)?.let(binding.emotionEmoji::setImageDrawable)

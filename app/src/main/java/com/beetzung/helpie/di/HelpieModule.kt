@@ -23,7 +23,7 @@ class HelpieModule {
     @Provides
     @Singleton
     fun provideRecognitionApi(): RecognitionApi {
-        return RecognitionApiDebug()
+        return RecognitionApiImpl()
 //        return if (BuildConfig.DEBUG) {
 //            RecognitionApiDebug()
 //        } else {
